@@ -1,9 +1,3 @@
----
-layout: page
-title: High-Performance Computing (HPC) for Research
-permalink: /README/
----
-
 ## Getting Ready for Hands-On
 
 First of all, you will add your public key to the Laguna user portal. This is to get ready for hands-on activities using Laguna's shell (command line) interface.
