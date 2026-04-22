@@ -1,6 +1,5 @@
 ---
 layout: page
-title: Home
 permalink: /
 cover_image: /images/cmc.webp
 cover_image_alt: Image of Claremont McKenna College campus beautifully illuminated
