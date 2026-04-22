@@ -5,7 +5,7 @@ title: High-Performance Computing at CMC QCL
 description: HPC research computing onboarding resources and updates.
 footer_address: Murty Sunak Quantative and Computing Lab
 footer_email: qcl@cmc.edu
-url: https://joanzheng.com
+url: https://cmc-qcl.github.io
 baseurl: /HPC-research-computing-onboarding
 theme: minima
 markdown: kramdown
