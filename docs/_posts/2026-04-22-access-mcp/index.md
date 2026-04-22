@@ -38,4 +38,4 @@ ACCESS MCP is also compatible with CLI, such as Claude Code and Gemini CLI.
 | Announcements | Community news and updates |
 | Affinity Groups | Community groups, events, and knowledge base |
 
-A tenth server, XDMoD Data Analytics, provides per-user job and usage data and requires a personal API token. It works with Claude Code and other CLI MCP clients but is not currently compatible with Claude.ai connectors. See the setup guide for details.
+A tenth server, XDMoD Data Analytics, provides per-user job and usage data and requires a personal API token. It works with Claude Code and other CLI MCP clients but is not currently compatible with Claude.ai connectors. See [the setup guide](https://mcp.access-ci.org/docs/getting-started#optional-xdmod-data-analytics) for details.
