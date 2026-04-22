@@ -1,3 +1,6 @@
+source: docs
+destination: _site
+
 title: High-Performance Computing at CMC QCL
 description: HPC research computing onboarding resources and updates.
 footer_address: Murty Sunak Quantative and Computing Lab
