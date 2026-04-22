@@ -20,9 +20,7 @@ This is a useful starting point for students and researchers who want to combine
 
 <img src="{{ '/images/access-mcp/claude-mcp.png' | relative_url }}" alt="Add an MCP to Claude" class="img-67-centered" />
 
-ACCESS's MCP server can easily be added in Claude's web version, as shown above. 
-
-ACCESS MCP is also compatible with CLI, such as Claude Code and Gemini CLI.
+ACCESS's MCP service can easily be added in Claude's web version, as shown above. This service is also compatible with CLI, such as Claude Code and Gemini CLI.
 
 ## ACCESS MCP Servers
 
