@@ -4,7 +4,7 @@ title: Blog
 permalink: /blog/
 ---
 
-News and updates for CMC QCL research computing onboarding.
+Stories, updates, and practical guidance from the Claremont McKenna College Quantitative and Computing Lab High-Performance Computing (HPC) for Research program.
 
 {% if site.posts and site.posts.size > 0 %}
 ## Recent Posts

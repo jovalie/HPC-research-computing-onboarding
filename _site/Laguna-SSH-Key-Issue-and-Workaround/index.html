@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Laguna SSH Key Issue and Workaround | High-Performance Computing at CMC QCL</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Laguna SSH Key Issue and Workaround" />
+<meta name="author" content="CMC QCL" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Solutions for SSH key configuration issues on Laguna, including how to generate SSH keys and manually add them to authorized_keys via Open OnDemand." />
+<meta property="og:description" content="Solutions for SSH key configuration issues on Laguna, including how to generate SSH keys and manually add them to authorized_keys via Open OnDemand." />
+<link rel="canonical" href="http://0.0.0.0:4000/HPC-research-computing/Laguna-SSH-Key-Issue-and-Workaround/" />
+<meta property="og:url" content="http://0.0.0.0:4000/HPC-research-computing/Laguna-SSH-Key-Issue-and-Workaround/" />
+<meta property="og:site_name" content="High-Performance Computing at CMC QCL" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-03T10:30:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Laguna SSH Key Issue and Workaround" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"CMC QCL"},"dateModified":"2025-11-03T10:30:00-06:00","datePublished":"2025-11-03T10:30:00-06:00","description":"Solutions for SSH key configuration issues on Laguna, including how to generate SSH keys and manually add them to authorized_keys via Open OnDemand.","headline":"Laguna SSH Key Issue and Workaround","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/HPC-research-computing/Laguna-SSH-Key-Issue-and-Workaround/"},"url":"http://0.0.0.0:4000/HPC-research-computing/Laguna-SSH-Key-Issue-and-Workaround/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/HPC-research-computing/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/HPC-research-computing/feed.xml" title="High-Performance Computing at CMC QCL" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/HPC-research-computing/">High-Performance Computing at CMC QCL</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/HPC-research-computing/">Home</a><a class="page-link" href="/HPC-research-computing/about/">About</a><a class="page-link" href="/HPC-research-computing/blog/">Blog</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+  
+    <figure class="cover-image-wrapper">
+      <img
+        src="/HPC-research-computing/images/encryption-decryption.png"
+        alt="Laguna SSH Key Issue and Workaround"
+        class="cover-image"
+        loading="lazy"
+      >
+    </figure>
+  
+
+  <header class="post-header">
+    <h1 class="post-title">Laguna SSH Key Issue and Workaround</h1>
+  </header>
+
+  <div class="post-content">
+    <h2 id="pre-requisite-ssh-key-pair">Pre-requisite: SSH Key Pair</h2>
+
+<p>If you haven’t generated your SSH private key and public key pair,</p>
+
+<ol>
+  <li>Open Terminal (Mac) or Windows Subsystem for Linux (Windows)</li>
+  <li>Generate an RSA key pair:</li>
+</ol>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ssh</span><span class="o">-</span><span class="nx">keygen</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">rsa</span> <span class="o">-</span><span class="nx">b</span> <span class="mi">4096</span>
+</code></pre></div></div>
+
+<p>Just enter-enter-enter to accept the default options. This will generate two files under .ssh folder.</p>
+
+<ul>
+  <li>Private key: id_rsa (this should not be shared with anyone.)</li>
+  <li>Public key: id_rsa.pub (this is a public key, i.e., no secret)</li>
+</ul>
+
+<ol>
+  <li>Open your public key, id_rsa.pub, from ~/.ssh folder and copy all text contents. It should start with “ssh-rsa” followed by a bunch of alphanumeric characters.</li>
+</ol>
+
+<h2 id="manually-adding-public-ssh-key-to-laguna">Manually Adding Public SSH Key to Laguna</h2>
+
+<p>An alternative is to use Open Ondemand to add their public ssh key to their “home_directory/.ssh/authorized_keys” file:</p>
+
+<ol>
+  <li>Open OOD (<a href="https://laguna-ood.carc.usc.edu/">https://laguna-ood.carc.usc.edu/</a>)</li>
+</ol>
+
+<p><img src="/HPC-research-computing/images/laguna-ssh-key-issue/Screenshot_2025-09-15_at_3.05.25_PM_(2).png" alt="Screenshot 2025-09-15 at 3.05.25 PM (2).png" /></p>
+
+<ol>
+  <li>Click the menu, Files</li>
+  <li>
+    <p>Click Home Directory</p>
+
+    <p><img src="/HPC-research-computing/images/laguna-ssh-key-issue/Screenshot_2025-09-15_at_3.05.32_PM_(2).png" alt="Screenshot 2025-09-15 at 3.05.32 PM (2).png" /></p>
+  </li>
+  <li>
+    <p>Check “Show Dotfiles” box</p>
+
+    <p><img src="/HPC-research-computing/images/laguna-ssh-key-issue/Screenshot_2025-09-15_at_3.05.41_PM_(2).png" alt="Screenshot 2025-09-15 at 3.05.41 PM (2).png" /></p>
+  </li>
+  <li>Click on .ssh folder</li>
+  <li>Click Edit for authorized_keys</li>
+</ol>
+
+<p><img src="/HPC-research-computing/images/laguna-ssh-key-issue/Screenshot_2025-09-15_at_3.05.54_PM_(2).png" alt="Screenshot 2025-09-15 at 3.05.54 PM (2).png" /></p>
+
+<ol>
+  <li>
+    <p>Add public ssh key (id_rsa.pub) to end of the authorized_keys file and save</p>
+
+    <p><img src="/HPC-research-computing/images/laguna-ssh-key-issue/Screenshot_2025-09-15_at_3.06.07_PM_(2).png" alt="Screenshot 2025-09-15 at 3.06.07 PM (2).png" /></p>
+  </li>
+</ol>
+
+<h2 id="ssh-to-laguna-without-password">SSH to Laguna without Password</h2>
+
+<p>Now it’s time to check if you can ssh to the Laguna server without password.</p>
+
+<ol>
+  <li>Open your terminal (Mac) / Bash for Git or CMD (Windows)</li>
+  <li>
+    <p>Type the following ssh command:</p>
+
+    <p>Example of my ssh command:</p>
+
+    <p><em>$ ssh JehoPark@cmc.edu@laguna.carc.usc.edu</em></p>
+
+    <p><img src="/HPC-research-computing/images/laguna-ssh-key-issue/Screenshot_2025-09-15_at_3.06.49_PM_(2).png" alt="Screenshot 2025-09-15 at 3.06.49 PM (2).png" /></p>
+  </li>
+</ol>
+
+<h2 id="checking-shell-access-from-ood">Checking Shell Access from OOD</h2>
+
+<ol>
+  <li>Open Laguna OnDemand</li>
+  <li>Click on the meny, Cluster, and then choose &gt;_Regional Cluster Shell Access</li>
+</ol>
+
+<p><img src="/HPC-research-computing/images/laguna-ssh-key-issue/Screenshot_2025-09-15_at_3.29.00_PM.png" alt="Screenshot 2025-09-15 at 3.29.00 PM.png" /></p>
+
+<ol>
+  <li>
+    <p>If the manual SSK key setup went well, you should see the following shell access from your browser.</p>
+
+    <p><img src="/HPC-research-computing/images/laguna-ssh-key-issue/Screenshot_2025-09-15_at_3.30.39_PM.png" alt="Screenshot 2025-09-15 at 3.30.39 PM.png" /></p>
+  </li>
+</ol>
+
+<p>We’ve heard that the browser shell access is not working even after manually adding the SSH public key. Please use your terminal or Git Bash.</p>
+
+  </div>
+</article>
+
+      </div>
+    </main><link id="fa-stylesheet" rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css">
+
+<footer class="site-footer h-card">
+    <data class="u-url" value="/HPC-research-computing/"></data>
+
+    <div class="wrapper">
+
+        <!-- <h2 class="footer-heading">High-Performance Computing at CMC QCL</h2> -->
+
+        <div class="footer-col-wrapper">
+            <div class="footer-col footer-col-1">
+                <ul class="contact-list">
+                    <li class="p-name">Murty Sunak Quantative and Computing Lab</li>
+                    <li class="p-name">qcl@cmc.edu</li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-col-2">
+                <ul class="social-media-list"></ul>
+            </div>
+
+            <div class="footer-col footer-col-3">
+                <p>HPC research computing onboarding resources and updates.</p>
+            </div>
+        </div>
+
+</footer></body>
+
+</html>
