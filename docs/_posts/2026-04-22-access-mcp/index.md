@@ -14,13 +14,7 @@ ACCESS-CI now supports connecting your AI assistant to ACCESS-CI services via a 
 
 This is a useful starting point for students and researchers who want to combine AI workflows with research computing resources.
 
-- Connect Your AI Assistant with ACCESS-CI: [https://support.access-ci.org/announcements/connect-your-ai-assistant-access-ci](https://support.access-ci.org/announcements/connect-your-ai-assistant-access-ci)
-
-## Claude Web with ACCESS MCP
-
-<img src="{{ '/images/access-mcp/claude-mcp.png' | relative_url }}" alt="Add an MCP to Claude" class="img-67-centered" />
-
-ACCESS's MCP service can easily be added in Claude's web version, as shown above. This service is also compatible with CLI, such as Claude Code and Gemini CLI.
+Connect Your AI Assistant with ACCESS-CI: [https://support.access-ci.org/announcements/connect-your-ai-assistant-access-ci](https://support.access-ci.org/announcements/connect-your-ai-assistant-access-ci)
 
 ## ACCESS MCP Servers
 
@@ -37,3 +31,16 @@ ACCESS's MCP service can easily be added in Claude's web version, as shown above
 | Affinity Groups | Community groups, events, and knowledge base |
 
 A tenth server, XDMoD Data Analytics, provides per-user job and usage data and requires a personal API token. It works with Claude Code and other CLI MCP clients but is not currently compatible with Claude.ai connectors. See [the setup guide](https://mcp.access-ci.org/docs/getting-started#optional-xdmod-data-analytics) for details.
+
+## Claude with ACCESS MCP
+
+Claude Desktop or claude.ai:
+
+1. In Claude, open Customize (palette/settings icon) > Connectors
+1. Click "Add custom connector"
+1. Paste `https://mcp.access-ci.org/compute-resources/sse` into the Server URL box
+1. Save and authorize when prompted
+
+<img src="{{ '/images/access-mcp/claude-mcp.png' | relative_url }}" alt="Add an MCP to Claude" class="img-67-centered" />
+
+ACCESS's MCP service can easily be added in Claude's web version, as shown above. This service is also compatible with CLI, such as Claude Code and Gemini CLI.
